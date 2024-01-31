@@ -23,8 +23,8 @@ const createAccessToken = (user, res) => {
   };
   if (process.env.NODE_ENV === "production")
     {
-    cookieOptionsRefresh.sameSite = "none";
-    cookieOptionsRefresh.secure = true;
+    cookieOptions.sameSite = "none";
+    cookieOptions.secure = true;
     }
   // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   // if (process.env.NODE_ENV === "development")
