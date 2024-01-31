@@ -24,6 +24,7 @@ const createAccessToken = (user, res) => {
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   if (process.env.NODE_ENV === "development")
     res.cookie("jwt", token, cookieOptions);
+  console.log("createAccessToken", token);
   return token;
 };
 
@@ -55,6 +56,7 @@ const createRefreshToken = async (user, res) => {
 
 const createSendToken = async (user, statusCode, res) => {
   const token = createAccessToken(user, res);
+  console.log("createSendToken", token);
   await createRefreshToken(user, res);
   // Remove password from output
   user.password = undefined;
