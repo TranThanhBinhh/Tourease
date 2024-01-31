@@ -20,6 +20,7 @@ const createAccessToken = (user, res) => {
     httpOnly: true,
     secure: false,
     sameSite: "none",
+    secure: false,
   };
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   if (process.env.NODE_ENV === "development")
@@ -46,6 +47,7 @@ const createRefreshToken = async (user, res) => {
     httpOnly: true,
     secure: false,
     sameSite: "none",
+    secure: false,
   };
   if (process.env.NODE_ENV === "production")
     cookieOptionsRefresh.sameSite = "none";
@@ -139,6 +141,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.cookies.jwt;
   }
   console.log(token);
+  
   if (!token) {
     return next(
       new AppError("You are not logged in! Please log in to get access.", 401)
