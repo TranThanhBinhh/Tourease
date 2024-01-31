@@ -15,19 +15,7 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRoutes");
 const tourRouter = require("./routes/tourRoutes");
-// const postRouter = require("./routes/postRoutes");
-// const commentRouter = require("./routes/commentRoutes");
-// const categoryRouter = require("./routes/categoryRoutes");
-// const trendingRouter = require("./routes/trendingRoutes");
-// const messageRouter = require("./routes/messageRoutes");
-// const searchRouter = require("./routes/searchRoutes");
-// const reportRouter = require("./routes/reportRouters");
-// const advertisementRouter = require("./routes/advertisementPlanRoutes");
-// const transactionRouter = require("./routes/transactionRoutes");
-// const priceRouter = require("./routes/unitPriceRoutes");
-// const feedRouter = require("./routes/feedRoutes");
-// const notiRouter = require("./routes/notificationRoutes");
-// const issueRouter = require("./routes/issueRoutes");
+
 
 const cors = require("cors");
 
