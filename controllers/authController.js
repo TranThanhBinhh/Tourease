@@ -19,14 +19,40 @@ const createAccessToken = (user, res) => {
     expires: new Date(Date.now() + 60 * 60 * 1000),
     httpOnly: true,
     secure: false,
-    // sameSite: "none",
+    sameSite: "none",
   };
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
-  if (process.env.NODE_ENV === "development")
+  if (process.env.NODE_ENV === "production")
+    {
+    cookieOptionsRefresh.sameSite = "none";
+    cookieOptionsRefresh.secure = true;
+    }
+  // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  // if (process.env.NODE_ENV === "development")
     res.cookie("jwt", token, cookieOptions);
-  console.log("createAccessToken", token);
   return token;
 };
+// const createAccessToken = async (user, res) => {
+//    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+//     expiresIn: "10000s",
+//   });
+//   await User.findByIdAndUpdate(user._id, {
+//     refreshToken: refreshToken,
+//   });
+//   const cookieOptions = {
+//     expires: new Date(Date.now() + 60 * 60 * 1000),
+//     httpOnly: true,
+//     secure: false,
+//     sameSite: "none",
+//   };
+//   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+//   if (process.env.NODE_ENV === "development")
+//   // if (process.env.NODE_ENV === "production")
+//   // {
+//   //   cookieOptionsRefresh.sameSite = "none";
+//   //   cookieOptionsRefresh.secure = true;
+//   //   }
+//   res.cookie("jwt", token, cookieOptions);
+// };
 
 const createRefreshToken = async (user, res) => {
   const refreshToken = jwt.sign(
@@ -46,17 +72,18 @@ const createRefreshToken = async (user, res) => {
     ),
     httpOnly: true,
     secure: false,
-    // sameSite: "none",
+    sameSite: "none",
   };
   if (process.env.NODE_ENV === "production")
+  {
     cookieOptionsRefresh.sameSite = "none";
-  if (process.env.NODE_ENV === "production") cookieOptionsRefresh.secure = true;
+    cookieOptionsRefresh.secure = true;
+    }
   res.cookie("refresh", refreshToken, cookieOptionsRefresh);
 };
 
 const createSendToken = async (user, statusCode, res) => {
   const token = createAccessToken(user, res);
-  console.log("createSendToken", token);
   await createRefreshToken(user, res);
   // Remove password from output
   user.password = undefined;
