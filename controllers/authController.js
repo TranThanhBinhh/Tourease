@@ -23,36 +23,14 @@ const createAccessToken = (user, res) => {
   };
   if (process.env.NODE_ENV === "production")
     {
-    cookieOptionsRefresh.sameSite = "none";
-    cookieOptionsRefresh.secure = true;
+    cookieOptions.sameSite = "none";
+    cookieOptions.secure = true;
     }
   // if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   // if (process.env.NODE_ENV === "development")
     res.cookie("jwt", token, cookieOptions);
   return token;
 };
-// const createAccessToken = async (user, res) => {
-//    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-//     expiresIn: "10000s",
-//   });
-//   await User.findByIdAndUpdate(user._id, {
-//     refreshToken: refreshToken,
-//   });
-//   const cookieOptions = {
-//     expires: new Date(Date.now() + 60 * 60 * 1000),
-//     httpOnly: true,
-//     secure: false,
-//     sameSite: "none",
-//   };
-//   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
-//   if (process.env.NODE_ENV === "development")
-//   // if (process.env.NODE_ENV === "production")
-//   // {
-//   //   cookieOptionsRefresh.sameSite = "none";
-//   //   cookieOptionsRefresh.secure = true;
-//   //   }
-//   res.cookie("jwt", token, cookieOptions);
-// };
 
 const createRefreshToken = async (user, res) => {
   const refreshToken = jwt.sign(
