@@ -19,8 +19,7 @@ const createAccessToken = (user, res) => {
     expires: new Date(Date.now() + 60 * 60 * 1000),
     httpOnly: true,
     secure: false,
-    sameSite: "none",
-    secure: false,
+    // sameSite: "none",
   };
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
   if (process.env.NODE_ENV === "development")
@@ -46,8 +45,7 @@ const createRefreshToken = async (user, res) => {
     ),
     httpOnly: true,
     secure: false,
-    sameSite: "none",
-    secure: false,
+    // sameSite: "none",
   };
   if (process.env.NODE_ENV === "production")
     cookieOptionsRefresh.sameSite = "none";
