@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema(
 );
 userSchema.pre(/^find/, function (next) {
   // this points to the current query
-  this.find({ active: { $ne: false } }).select("-verifyToken -refreshToken -isActived -__v");
+  this.find({ active: { $ne: false } }).select("-verifyToken -refreshToken -__v");
   next();
 });
 

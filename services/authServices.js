@@ -48,7 +48,7 @@ exports.login = (data) => {
       }
       // 2) Check if user exists && password is correct
       const user = await UserModel.findOne({ email })
-        .select("+password");
+        .select("+password ");
       if (!user || !(await user.correctPassword(password, user.password))) {
         reject(new AppError("Incorrect email or password", 401));
       }
@@ -65,8 +65,8 @@ exports.login = (data) => {
           await UserModel.findByIdAndUpdate(user._id, {
             verifyToken: verifyToken,
           });
+        resolve(user);
         }
-      resolve(user);
     } catch (error) {
       reject(error);
     }
