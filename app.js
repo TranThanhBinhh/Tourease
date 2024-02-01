@@ -29,6 +29,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
+      "https://frontend-teal-pi.vercel.app"
     ],
     credentials: true, // Allow credentials (cookies) to be sent
   })
