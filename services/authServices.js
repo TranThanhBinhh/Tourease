@@ -101,7 +101,6 @@ exports.resetPassword = (email) => {
           const LENGTH = 12;
           const CHARACTERS =
             "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@-#$";
-          // console.log(generatedPassword);
           const generatedPassword = Array.from(
             crypto.randomFillSync(new Uint32Array(LENGTH))
           )
