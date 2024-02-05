@@ -16,6 +16,8 @@ const globalErrorHandler = require("./controllers/errorController");
 const userRouter = require("./routes/userRoutes");
 const tourRouter = require("./routes/tourRoutes");
 const commentRouter = require("./routes/commentRoutes");
+const likeRouter = require("./routes/likeRoutes");
+
 
 
 
@@ -109,6 +111,8 @@ app.use((req, res, next) => {
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/comments", commentRouter);
+app.use("/api/v1/likes", likeRouter);
+
 
 
 app.all("*", (req, res, next) => {

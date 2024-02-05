@@ -1,5 +1,6 @@
 const TourModel = require("./../models/toursModel");
 const AppError = require("./../utils/appError");
+const { checkLike } = require("./../services/likeServices");
 
 exports.createTour = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -36,17 +37,22 @@ exports.createTour = (data) => {
   });
 };
 
-exports.getDetailTour = (tourId) => {
+exports.getDetailTour = (tourId,userId) => {
   return new Promise(async (resolve, reject) => {
     try {
       if (!tourId) {
         reject(new AppError("Please fill in all required fields", 400));
       } else {
-          const tour = await TourModel.findById(tourId);
-          if (tour) {
-              resolve({
-              status: "success",
-              data : tour
+        const tour = await TourModel.findById(tourId);
+        const check = await checkLike(userId, tourId);
+        console.log(check);
+        if (tour) {
+          resolve({
+            status: "success",
+            data: {
+              ...tour.toObject(),
+              isLiked: check
+            }
             });
           }
           else {
