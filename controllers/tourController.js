@@ -10,7 +10,7 @@ exports.createTour = catchAsync(async (req, res, next) => {
         )
 });
 exports.getDetailTour = catchAsync(async (req, res, next) => {
-    const data = await tourServices.getDetailTour(req.params.tourId);
+    const data = await tourServices.getDetailTour(req.params.tourId,req.user.id);
         return res.status(200).json(
             data
         )

@@ -19,6 +19,10 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true],
     },
+    numLikes: {
+      type: Number,
+      defaultValue:0,
+    },
     period: {
       type: String,
       required: [true],
