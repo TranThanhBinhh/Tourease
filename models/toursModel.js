@@ -32,11 +32,8 @@ const tourSchema = new mongoose.Schema(
     //   required: [true],
     //     },
     images: {
-      type: [String],
-      validate: {
-        validator: (array) => array.length <= 4,
-        message: "A tour can have only up to 4 images",
-      },
+      type: String,
+      required: [true],
     },
     destination: {
       type: String,
