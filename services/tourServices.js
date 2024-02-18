@@ -89,7 +89,7 @@ exports.updateTour = (data) => {
           period : data.period,
           destination : data.destination,
           departureDay : data.departureDay,
-          image : data.image
+          images : data.images
         });
           resolve({
               status: "success",
