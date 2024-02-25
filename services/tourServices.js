@@ -1,4 +1,5 @@
 const TourModel = require("./../models/toursModel");
+const LikeModel = require("./../models/likesModel");
 const AppError = require("./../utils/appError");
 const { checkLike } = require("./../services/likeServices");
 
@@ -45,7 +46,6 @@ exports.getDetailTour = (tourId,userId) => {
       } else {
         const tour = await TourModel.findById(tourId);
         const check = await checkLike(userId, tourId);
-        console.log(check);
         if (tour) {
           resolve({
             status: "success",
@@ -94,6 +94,69 @@ exports.updateTour = (data) => {
           resolve({
               status: "success",
         });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+exports.searchTour = (queryParams) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const conditions = [];
+      if (queryParams.destination) {
+        conditions.push({ destination: { $regex: queryParams.destination, $options: 'i' } });
+      }
+      if (queryParams.minPrice) {
+        conditions.push({ price: { $gte: queryParams.minPrice } });
+      }
+      if (queryParams.maxPrice) {
+        conditions.push({ price: { $lte: queryParams.maxPrice } });
+      }
+      if (queryParams.period) {
+        conditions.push({ period : queryParams.period  });
+      }
+      if (queryParams.departureLocation) {
+        conditions.push({ departureLocation : queryParams.departureLocation  });
+      }
+
+      const tours = await TourModel.find({ $and: conditions });
+
+      if (tours.length > 0) {
+        resolve({
+          status: "success",
+          total: tours.length,
+          data: tours
+        });
+      } else {
+        resolve({
+          message: "No tours found "
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+exports.getFavoriteTourList = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!userId) {
+        reject(new AppError("Please fill in all required fields", 400));
+      } else {
+        const tours= await LikeModel.find({user: userId}).populate('tour');
+        if (tours) {
+          resolve({
+            status: "success",
+            total:tours.length,
+            data:tours
+            });
+          }
+          else {
+            resolve({
+            message:"You haven't liked any trip yet"
+            });
+          }
       }
     } catch (error) {
       reject(error);
