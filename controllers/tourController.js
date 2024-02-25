@@ -22,5 +22,15 @@ exports.updateTour = catchAsync(async (req, res, next) => {
             data
         )
 });
-
-
+exports.searchTour = catchAsync(async (req, res, next) => {
+    const data = await tourServices.searchTour(req.query);
+        return res.status(200).json(
+            data
+        )
+});
+exports.getFavoriteTourList = catchAsync(async (req, res, next) => {
+    const data = await tourServices.getFavoriteTourList(req.user.id);
+        return res.status(200).json(
+            data
+        )
+});

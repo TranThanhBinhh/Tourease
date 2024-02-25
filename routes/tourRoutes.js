@@ -7,6 +7,9 @@ const router = express.Router();
 router.use(authController.protect);
 router.get("/getDetailTour/:tourId", tourController.getDetailTour);
 router.get("/getAllTours", tourController.getAllTours);
+router.get("/searchTour", tourController.searchTour);
+router.get("/getFavoriteTourList", tourController.getFavoriteTourList);
+
 
 //admin
 router.use(authController.restrictTo("admin"));
