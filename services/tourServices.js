@@ -102,7 +102,6 @@ exports.updateTour = (data) => {
 };
 exports.searchTour = async (queryParams) => {
   try {
-    await convertPriceToNumber();
     if (queryParams.limit === undefined) { 
       queryParams.limit = 10
     }
