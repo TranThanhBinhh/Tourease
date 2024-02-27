@@ -100,44 +100,56 @@ exports.updateTour = (data) => {
     }
   });
 };
-exports.searchTour = (queryParams) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const conditions = [];
-      if (queryParams.destination) {
-        conditions.push({ destination: { $regex: queryParams.destination, $options: 'i' } });
-      }
-      if (queryParams.minPrice) {
-        conditions.push({ price: { $gte: queryParams.minPrice } });
-      }
-      if (queryParams.maxPrice) {
-        conditions.push({ price: { $lte: queryParams.maxPrice } });
-      }
-      if (queryParams.period) {
-        conditions.push({ period : queryParams.period  });
-      }
-      if (queryParams.departureLocation) {
-        conditions.push({ departureLocation : queryParams.departureLocation  });
-      }
-
-      const tours = await TourModel.find({ $and: conditions });
-
-      if (tours.length > 0) {
-        resolve({
-          status: "success",
-          total: tours.length,
-          data: tours
-        });
-      } else {
-        resolve({
-          message: "No tours found "
-        });
-      }
-    } catch (error) {
-      reject(error);
+exports.searchTour = async (queryParams) => {
+  try {
+    await convertPriceToNumber();
+    if (queryParams.limit === undefined) { 
+      queryParams.limit = 10
     }
-  });
+    const conditions = {};
+    
+    if (queryParams.destination) {
+      conditions.destination = { $regex: queryParams.destination, $options: 'i' };
+    }
+    if (queryParams.minPrice) {
+      conditions.price = { $gte: parseFloat(queryParams.minPrice) };
+    }
+    if (queryParams.maxPrice) {
+      conditions.price = { ...conditions.price, $lte: parseFloat(queryParams.maxPrice) };
+    }
+    if (queryParams.period) {
+      conditions.period = queryParams.period;
+    }
+    if (queryParams.departureLocation) {
+      conditions.departureLocation = queryParams.departureLocation;
+    }
+
+    const totalTours = await TourModel.countDocuments(conditions);
+    const totalPages = Math.ceil(totalTours / queryParams.limit);
+    const skip = (queryParams.page - 1) * queryParams.limit;
+
+    const tours = await TourModel.find(conditions)
+      .skip(skip)
+      .limit(queryParams.limit);
+
+    if (tours.length > 0) {
+      return {
+        status: "success",
+        total: totalTours,
+        totalPages: totalPages,
+        currentPage: queryParams.page,
+        data: tours
+      };
+    } else {
+      return {
+        message: "No tours found"
+      };
+    }
+  } catch (error) {
+    throw error;
+  }
 };
+
 exports.getFavoriteTourList = (userId) => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -163,3 +175,4 @@ exports.getFavoriteTourList = (userId) => {
     }
   });
 };
+
