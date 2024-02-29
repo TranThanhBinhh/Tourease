@@ -13,6 +13,7 @@ router.post('/forgotPassword', authController.resetPassword);
 router.use(authController.protect);
 router.get("/me", userController.getMe);
 router.patch("/updateMe", userController.updateMe);
+router.patch("/changePassword", userController.changePassword);
 //admin
 router.use(authController.restrictTo("admin"));
 router.get("/", userController.getAllUsers);

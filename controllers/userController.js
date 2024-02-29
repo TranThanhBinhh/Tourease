@@ -24,5 +24,10 @@ exports.lockOrUnlockAccount = catchAsync(async (req, res, next) => {
         )
 });
 
-
+exports.changePassword = catchAsync(async (req, res, next) => {
+    const data = await userServices.changePassword(req.user.id,req.body);
+        return res.status(200).json(
+            data
+        )
+});
 
