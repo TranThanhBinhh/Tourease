@@ -1,5 +1,6 @@
 const UserModel = require("./../models/userModel");
 const AppError = require("./../utils/appError");
+const bcrypt = require("bcryptjs");
 
 exports.getMe = (id) => {
   return new Promise(async (resolve, reject) => {
@@ -78,6 +79,45 @@ exports.lockOrUnlockAccount = (id) => {
         });
       }
 
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+exports.changePassword = (id, data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!id || !data.currentPassword || !data.newPassword || !data.confirmPassword) {
+        reject(new AppError(`Missing parameter`, 400));
+      } else {
+        let user = await UserModel.findById(id).select("password");
+        if (!user) {
+          resolve({
+            errCode: 1,
+            message: "User not found"
+          });
+        }
+        const isCorrectPassword = await user.correctPassword(data.currentPassword, user.password);
+        if (!isCorrectPassword) {
+          resolve({
+            errCode: 2,
+            message: "Current password is incorrect"
+          });
+        }
+        if (data.newPassword !== data.confirmPassword) {
+          resolve({
+            errCode: 3,
+            message: "The confirmation password does not match the new password"
+          });
+        }
+        user.password = data.newPassword;
+        await user.save();
+        resolve({
+          errCode: 0,
+          message: "Password updated successfully"
+        });
+      }
     } catch (error) {
       reject(error);
     }
