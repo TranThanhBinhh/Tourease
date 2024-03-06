@@ -104,7 +104,7 @@ const sendResetPwEmail = async (email, subject, newPassword) => {
       
         <!-- start preheader -->
         <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-          Beegin account password reset
+          Tourease account password reset
         </div>
         <!-- end preheader -->
       
@@ -145,8 +145,7 @@ const sendResetPwEmail = async (email, subject, newPassword) => {
               <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                 <tr>
                   <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-                    <div style="display:flex; align-items:center; margin-bottom: 10px"><img src="https://res.cloudinary.com/ds6hdw753/image/upload/v1702348259/mpl6bmgcqwmpens9xdyb.png" alt="Logo" border="0" width="24px" style="display: block; width: 24px; max-width: 24px; height: 24px; min-width: 24px;"><h4 style="font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-weight: 900; margin: 0 0 0 5px; font-size: 20px; color: #76356d">BEEMAIL</h4></div>
-                    <img src="https://res.cloudinary.com/ds6hdw753/image/upload/v1701835724/e1jr8ccmjbfxtthpqjpw.jpg" alt="Logo" border="0" width="100%" style="display: block; width: 100%; max-width: 100%; min-width: 100%; margin-bottom: 40px">
+                    <div style="display:flex; align-items:center; margin-bottom: 10px"><h4 style="font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-weight: 900; margin: 0 0 0 5px; font-size: 20px; color: #76356d">TOUREASE</h4></div>
                     <h3 style="margin-bottom: 5px; font-size: 15px; font-weight: 700; letter-spacing: 0px; line-height: 15px; ">YOU'RE REGAINING YOUR ACCESS,</h3>
                     <h1 style="margin: 0; font-size: 42px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">YOUR PASSWORD HAS BEEN RESET</h1>
                   </td>
@@ -200,7 +199,7 @@ const sendResetPwEmail = async (email, subject, newPassword) => {
                 
                 <tr>
                   <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                    <p style="margin: 0;">If you didn't request a password reset with <a href="https://beegin-app.vercel.app/" style=" color: #ae65e4">Beegin</a>, you can safely delete this email.</p>
+                    <p style="margin: 0;">If you didn't request a password reset with <a href="https://frontend-teal-pi.vercel.app/" style=" color: #ae65e4">Tourease</a>, you can safely delete this email.</p>
                   </td>
                 </tr>
                 <tr>
@@ -215,7 +214,7 @@ const sendResetPwEmail = async (email, subject, newPassword) => {
                                   <img src="https://res.cloudinary.com/ds6hdw753/image/upload/v1701838895/npgg0q5fcllivupddsef.png" style="height: 80px; margin-right: 20px"/>
                                   <div style="display: flex; flex-direction: column; margin-right: 20px; margin-top: 0">
                                     <h3 style="margin-bottom: 5px; font-size: 16px; font-weight: 500; letter-spacing: 0px; line-height: 15px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; width: fit-content;">Have a question? </h3>
-                                     <a href="mailto:beegin.app.official@example.com" style="margin-bottom: 5px; font-size: 16px; font-weight: 500; letter-spacing: 0px; line-height: 15px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; width: fit-content; color: #ae65e4">Reach out to our team</a>
+                                     <a href="tbinh7469@gmail.com" style="margin-bottom: 5px; font-size: 16px; font-weight: 500; letter-spacing: 0px; line-height: 15px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; width: fit-content; color: #ae65e4">Reach out to our team</a>
                                   </div>
                                 </div>
                               </td>
@@ -264,7 +263,7 @@ const sendResetPwEmail = async (email, subject, newPassword) => {
                 <tr>
                   <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
                     <p style="margin: 0;">To stop receiving these emails, you can unsubscribe at any time.</p>
-                    <p style="margin: 0;">Beegin Team - DaNang, Vietnam</p>
+                    <p style="margin: 0;">Tourease Team - DaNang, Vietnam</p>
                   </td>
                 </tr>
                 <!-- end unsubscribe -->
