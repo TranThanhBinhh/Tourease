@@ -229,10 +229,9 @@ exports.restrictTo = (...roles) => {
   };
 };
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  await authService.resetPassword(req.body.email);
+   const data = await authService.resetPassword(req.body.email);
   res.status(200).json({
-    status: "success",
-    message: "Your password has been reset.",
+    data
   });
 });
 
