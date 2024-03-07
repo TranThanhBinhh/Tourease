@@ -116,7 +116,7 @@ exports.resetPassword = (email) => {
             status: "Success",
           });
         } else {
-          reject(new AppError("This email has not been registered", 401));
+          reject(new AppError("This email has not been registered", 404));
         }
       }
     } catch (error) {
